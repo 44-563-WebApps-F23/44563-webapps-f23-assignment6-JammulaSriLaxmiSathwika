@@ -2,6 +2,14 @@
 <html>
     <head>
         <title>Author</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
+          integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     </head>
  
 <body>
@@ -15,12 +23,13 @@
     <label for="guess-author">Guess the author:</label>
     <input type="text" id="guess-author"><br>
 
-    <input type="button" value="Check the guess" onclick="checkAuthor()"><br>
+    <input type="button" class="btn btn-warning" value="Check the guess" onclick="checkAuthor()"><br>
     <p id="result"></p>
 </form>
 <script>
     var good = 0;
     var oops = 0;
+    var maxIncorrectGuesses = 7;
     function checkAuthor() {
         var hiddenAuthorValue = document.getElementById("hidden-author").value;
         var guessAuthorValue = document.getElementById("guess-author").value;
@@ -29,8 +38,15 @@
             alert("You got it right");
         } else {
             oops++;
+            if (oops > maxIncorrectGuesses) {
+                    alert("Sorry, ran out of guesses.");
+                    document.getElementById("guess-author").onclick = function() {
+                        alert("Sorry, ran out of guesses.");
+                    };
+        }else{
             alert("Sorry");
         }
+     }
         var resultElement = document.getElementById("result");
         resultElement.innerHTML = "Good: " + good + ", Oops: " + oops;
     }
