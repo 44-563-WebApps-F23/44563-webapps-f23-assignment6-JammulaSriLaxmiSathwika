@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>cruise</title>
+</head>
+<body>
+    <h2>Jammula SriLaxmiSathwika goes on a cruise</h2>
+
+    <script>
+        var my_cruise = {};
+
+        function selectCruise() {
+            my_cruise = {
+                shared: document.getElementById("sharedCheckbox").checked,
+                breakfast: document.getElementById("breakfastCheckbox").checked,
+                pool: document.getElementById("poolCheckbox").checked
+            };
+
+            document.getElementById("cruiseInfo").innerHTML = JSON.stringify(my_cruise);
+        }
+
+        function updateCruise() {
+            var daysInput = document.getElementById("daysInput").value;
+            var priceInput = document.getElementById("priceInput").value;
+
+            my_cruise.days = daysInput;
+            my_cruise.price = priceInput;
+
+            document.getElementById("updatecruiseInfo").innerHTML = JSON.stringify(my_cruise);
+        }
+    </script>
+    <form>
+        <div class="form-group">
+            <label for="sharedCheckbox">Shares Cabin:</label>
+            <input type="checkbox" id="sharedCheckbox" value="True">
+        </div>
+
+        <div class="form-group">
+            <label for="breakfastCheckbox">Breakfast:</label>
+            <input type="checkbox" id="breakfastCheckbox" value="True">
+        </div>
+
+        <div class="form-group">
+            <label for="poolCheckbox">Pool Pass:</label>
+            <input type="checkbox" id="poolCheckbox" value="False">
+        </div>
+
+        <input type="button" value="Select a cruise" onclick="selectCruise()">
+    </form>
+    <p id="cruiseInfo"></p>
+
+    <form>
+        <label for="daysInput">Enter the number of days:</label>
+        <input type="text" id="daysInput" value=""><br><br>
+
+        <label for="priceInput">Enter price:</label>
+        <input type="text" id="priceInput"><br><br>
+
+        <input type="button" value="Update the cruise" onclick="updateCruise()">
+    </form>
+    <p id="updatecruiseInfo"></p>
+</body>
+</html>
